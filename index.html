@@ -11,7 +11,7 @@
         <input id="name" placeholder="Name">
         <input id="email" placeholder="Email">
         <input id="course" placeholder="Course">
-        <button id="submit">Add</button>
+        <button type="submit">Add</button>
     </form>
     <ul id="list"></ul>
 </body>
@@ -23,6 +23,39 @@
         const email = document.getElementById('email').value 
         const course = document.getElementById('course').value
 
+        if (!name || !email || !course){
+            alert('All fields are required')
+                return
+            
+        }
+
+        await fetch('http://localhost:3000/students',{
+            method: 'POST',
+            headers:{'Content-Type': 'application/json' },
+            body:JSON.stringify({name,email,course})
+        })
+
+        loadStudents()
     })
+ 
+    async function loadStudents(){
+        const res = await fetch('http://localhost:3000')
+            const students = await res.json()
+            const list = document.getElementsId('list')
+
+            list.innerHTML = ''
+            students.forEach(student => {
+                const li = document.createElement('li')
+                li.textContent = `${student.name} - ${student.course}`
+
+                list.appendChild(li)
+
+            })
+
+          loadStudents()
+
+        
+    }
+
 </script>
 </html>
