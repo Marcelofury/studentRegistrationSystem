@@ -3,5 +3,5 @@
 - name
 - email
 - course
-
+## Logic
 - These fields are  validated and also used to communicate with the backend through  form eventListener and later displayed into the UI through DOM manipulatiion using inner HTML
